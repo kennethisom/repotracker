@@ -88,3 +88,10 @@ STATIC_URL = '/static/'
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
 )
+
+LOGIN_URL = 'accounts/login/'
+
+TEMPLATE_DIRS = (
+    'repos/templates',
+    'accounts/templates',
+)
