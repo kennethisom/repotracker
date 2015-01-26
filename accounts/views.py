@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 
 def login(request):
     username = request.POST.get('username', None)
@@ -23,3 +24,7 @@ def login(request):
         # Display login page
         context = {'next': request.GET['next']}
         return render(request, 'accounts/login.html', context)
+
+def logout(request):
+    auth_logout(request)
+    # Redirect to a success page.
