@@ -12,10 +12,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 import os
 
-PROJECT_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), ".."),
-)
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
@@ -88,15 +84,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
 
-BOWER_COMPONENTS_ROOT = PROJECT_DIR
+BOWER_COMPONENTS_ROOT = BASE_DIR
 
 #STATICFILES_FINDER = (
-#    "django.contrib.staticfiles.finders.FileSystemFinder",
-#    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+#    Why didn't this work?
 #    'djangobower.finders.BowerFinder',
 #)
 
