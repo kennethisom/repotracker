@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+PROJECT_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), ".."),
+)
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -38,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djangobower',
     'repos',
 )
 
@@ -83,7 +88,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
 STATIC_URL = '/static/'
+
+BOWER_COMPONENTS_ROOT = PROJECT_DIR
+
+#STATICFILES_FINDER = (
+#    "django.contrib.staticfiles.finders.FileSystemFinder",
+#    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+#    'djangobower.finders.BowerFinder',
+#)
+
+STATICFILES_DIRS = (
+    os.path.join(BOWER_COMPONENTS_ROOT, 'bower_components'),
+)
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
@@ -95,3 +114,5 @@ TEMPLATE_DIRS = (
     'repos/templates',
     'accounts/templates',
 )
+
+BOWER_INSTALLED_APPS = ('jquery#2.1.3', 'bootstrap#3.3.2')

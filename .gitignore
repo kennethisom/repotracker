@@ -57,6 +57,13 @@ docs/_build/
 target/
 
 
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+
 ### Django ###
 *.log
 *.pot
