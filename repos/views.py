@@ -5,6 +5,7 @@ from repos.models import Repo
 
 @login_required
 def index(request):
+    context = {}
     if 'url' in request.POST:
         error = False
         error_msg = ''
@@ -21,9 +22,12 @@ def index(request):
             if full_repo_name.endswith('.git'):
                 full_repo_name = full_repo_name[:-4]
             short_repo_name = full_repo_name.rsplit('/', 1)[1]
-            u = User.objects.get(username='kenneth')
+            u = request.user
             new_repo = Repo(name=full_repo_name, short_name=short_repo_name, url=new_url, submitting_user=u)
             new_repo.save()
+            context['message_type'] = "success"
+            context['message'] = "<strong>Yay!</strong> Repo was added successfully!"
     current_repos = Repo.objects.all()
-    context = {'current_repos': current_repos}
+    context['current_repos'] = current_repos
+    context['user'] = request.user.username
     return render(request, 'repos/index.html', context)
